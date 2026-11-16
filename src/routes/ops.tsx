@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { OPS_LOG, DECLARED_GATEWAYS, OPS_ARTIFACT_NAME, type OpsEntry } from "@/data/ops";
 import { canonicalize, valueToCid } from "@/lib/cid";
-import { probeCorsJson, probeOpaqueHead, type ProbeStatus } from "@/lib/probes";
+import { probeOpaqueHead, type ProbeStatus } from "@/lib/probes";
 import { CentralizationInventory } from "@/components/audit/CentralizationInventory";
 import { ExtractionAudit } from "@/components/audit/ExtractionAudit";
 import { BuildReceipt } from "@/components/audit/BuildReceipt";
@@ -76,10 +76,7 @@ function OpsPage() {
       const out: Record<string, ProbeStatus> = {};
       await Promise.all(
         DECLARED_GATEWAYS.map(async (g) => {
-          const status =
-            g.host === "monarch.xinus.one"
-              ? await probeCorsJson(g.url, "ok")
-              : await probeOpaqueHead(g.url);
+          const status = await probeOpaqueHead(g.url);
           out[g.host] = status;
         }),
       );

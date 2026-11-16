@@ -3,14 +3,11 @@ import { useEffect, useMemo, useState } from "react";
 import { loadOre, oreLoads } from "@/lib/ore";
 import { loadSamples, sampleSubstrate, pushSample, type BtcSample } from "@/lib/btc-substrate";
 import { loadChain } from "@/data/truth-chain";
-import { NODES } from "@/data/nodes";
 import { valueToCid } from "@/lib/cid";
 import { buildVector, coherence as mmrCoherence, type AxisKey } from "@/lib/mmr-vectors";
 import { SriYantraOverlay } from "@/components/SriYantraOverlay";
-import { SovereignStatus } from "@/components/SovereignStatus";
 import { loadEnvelopes, verifyChain } from "@/data/truth-ledger";
 import { loadOperatorKeys } from "@/lib/sovereign-keys";
-import { useProbeStatus } from "@/lib/probe-store";
 
 export const Route = createFileRoute("/seventh-dimension")({
   head: () => ({
@@ -18,9 +15,9 @@ export const Route = createFileRoute("/seventh-dimension")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { title: "Seventh Dimension · Unification Surface" },
-      { name: "description", content: "The 7D unifier: Digital Ore × Truth Substrate × Truth Chain × Resonate-Earth, projected as a single sovereign axis." },
+      { name: "description", content: "Seventh Dimension projects local Digital Ore, Truth Substrate, Truth Chain and PAM records; external planetary evidence is not configured." },
       { property: "og:title", content: "Seventh Dimension · Nexinus Terminus" },
-      { property: "og:description", content: "Refined ore, attested substrate, and planetary resonance — one CID, one witness, one axis." },
+      { property: "og:description", content: "A recomputable unsigned local snapshot, not signed fleet or planetary verification." },
     ],
   }),
   component: SeventhDimensionPage,
@@ -47,7 +44,6 @@ function SeventhDimensionPage() {
   const [rot, setRot] = useState(0);
   const [pamCount, setPamCount] = useState(0);
   const [keyPresent, setKeyPresent] = useState(false);
-  const earthProbe = useProbeStatus("resonate-earth");
 
   useEffect(() => {
     const ore = loadOre();
@@ -68,7 +64,6 @@ function SeventhDimensionPage() {
     return () => { clearInterval(t); if (r !== null) clearInterval(r); };
   }, []);
 
-  const resonateNode = NODES.find((n) => n.id === "resonate-earth");
 
   // Unity CID: hash the cross-axis snapshot. Recomputable, verifiable.
   useEffect(() => {
@@ -81,7 +76,7 @@ function SeventhDimensionPage() {
         priceUsd: sample.priceUsd,
       } : null,
       chain: { links: chainLen },
-      earth: { node: resonateNode?.id ?? null, probe: earthProbe.state },
+      earth: { node: null, evidence: "not-configured" },
       pam: { verifiedEnvelopes: pamCount },
       kether: { localKeyPresent: keyPresent },
     };
@@ -91,7 +86,7 @@ function SeventhDimensionPage() {
     // certificate must NOT display VALIDATED.
     void valueToCid(snapshot).then(setUnityCid);
     void valueToCid(snapshot).then(setUnityRederived);
-  }, [oreCount, oreDou, sample, chainLen, resonateNode, earthProbe.state, pamCount, keyPresent]);
+  }, [oreCount, oreDou, sample, chainLen, pamCount, keyPresent]);
 
   const unityMirror: "validated" | "drift" | "computing" =
     !unityCid || !unityRederived
@@ -128,13 +123,13 @@ function SeventhDimensionPage() {
       ore: oreActivity,
       sudo: sudoActivity,
       chain: chainActivity,
-      earth: earthProbe.state === "reachable" ? 0.5 : 0,
+      earth: 0,
       pam: Math.min(1, pamCount / 7),
       kether: keyPresent ? 1 : 0,
       axis: Math.max(oreActivity, sudoActivity, chainActivity),
     };
     return buildVector(raw);
-  }, [oreActivity, sudoActivity, chainActivity, earthProbe.state, pamCount, keyPresent]);
+  }, [oreActivity, sudoActivity, chainActivity, pamCount, keyPresent]);
   const coh = mmrCoherence(mmr);
 
   return (
@@ -148,7 +143,7 @@ function SeventhDimensionPage() {
         <h1 className="mt-3 text-sm uppercase tracking-[0.18em] text-primary">one axis · seven projections</h1>
         <p className="mt-2 max-w-3xl text-xs text-muted-foreground">
           the seventh-dimensional projection collapses ore (operator byproduct), truth substrate (chain substrate read),
-          truth-chain links, resonate-earth resonance, pam lane discipline, and kether key custody onto a single
+          truth-chain links, the unconfigured planetary axis, pam lane discipline, and local key presence onto a single
           recomputable witness. nothing here is novel state — it is the existing local sovereign field, seen as one.
         </p>
         <div className="mt-4 flex flex-wrap gap-px border border-border bg-border">
@@ -206,7 +201,7 @@ function SeventhDimensionPage() {
           <AxisRow glyph="⛬" name="ORE" desc="verified local estimates" v={`${oreCount} verified claims · ${oreDou.toFixed(0)} grade`} activity={oreActivity} href="/digital-ore" />
           <AxisRow glyph="◈" name="TRS" desc="bitcoin substrate read" v={sample ? `block ${sample.block.height.toLocaleString()} · ore=${sample.oreIndex.toFixed(2)}` : "awaiting sample"} activity={sudoActivity} href="/sudo-coin" />
           <AxisRow glyph="◇" name="CHAIN" desc="truth-chain links enrolled" v={`${chainLen} link${chainLen === 1 ? "" : "s"}`} activity={chainActivity} href="/fleet" />
-          <AxisRow glyph="⬡" name="EARTH" desc="resonate-earth.live" v={`${earthProbe.state.toUpperCase()} · signature unverified`} activity={earthProbe.state === "reachable" ? 0.5 : 0} href="/nebula" />
+          <AxisRow glyph="⬡" name="EARTH" desc="external evidence not configured" v="OPERATOR EVIDENCE REQUIRED" activity={0} href="/nebula" />
           <AxisRow glyph="♕" name="PAM" desc="lane discipline ledger" v={`${pamCount} intact local envelopes`} activity={Math.min(1, pamCount / 7)} href="/pam" />
           <AxisRow glyph="⊕" name="KETHER" desc="local key presence · not custody proof" v={keyPresent ? "local key present" : "no local key"} activity={keyPresent ? 1 : 0} href="/gateway" />
           <AxisRow glyph="◬" name="AXIS" desc="the unifier" v="this surface" activity={Math.max(oreActivity, sudoActivity, chainActivity)} href="/seventh-dimension" />
@@ -246,13 +241,12 @@ function SeventhDimensionPage() {
       </section>
 
       <section className="border border-primary/30 bg-background/40 p-6">
-        <Label a="EARTH ATTESTATION" b="resonate-earth · one-click sovereign verify" />
+        <Label a="EARTH EVIDENCE" b="not configured" />
         <p className="mt-2 max-w-3xl text-xs text-foreground/85">
-          Recomputes the resonate-earth declaration CID, probes reachability, surfaces drift against any
-          stored Truth-Chain link. Defaults to UNVERIFIED. Only an explicit pass flips the PISTIFUS-VALIDATED sigil.
+          No canonical planetary witness was supplied. This axis carries no measurement or signature.
         </p>
         <div className="mt-4 max-w-md">
-          <SovereignStatus nodeId="resonate-earth" label="resonate-earth.live" />
+          <p className="text-xs text-warning">OPERATOR EVIDENCE REQUIRED</p>
         </div>
       </section>
 

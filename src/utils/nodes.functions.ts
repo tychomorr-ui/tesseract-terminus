@@ -31,11 +31,9 @@ async function hit(url: string): Promise<{ status: number } | null> {
 async function probeHost(id: string, host: string): Promise<HostProbe> {
   const started = Date.now();
   const checkedAt = new Date().toISOString();
-  // Raw IPs rarely carry a matching TLS cert, so plain HTTP is tried first;
-  // an answer on either scheme proves the host is up and routable.
-  const http = await hit(`http://${host}/`);
-  const answer = http ?? (await hit(`https://${host}/`));
-  const via = http ? "http" : answer ? "https" : null;
+  // Canonical hostname declarations require HTTPS; never fall back to plain HTTP.
+  const answer = await hit(`https://${host}/`);
+  const via = answer ? "https" : null;
   return {
     id,
     host,
@@ -52,7 +50,7 @@ async function probeHost(id: string, host: string): Promise<HostProbe> {
 export const probeNodeHosts = createServerFn({ method: "GET" }).handler(
   async (): Promise<HostProbe[]> =>
     Promise.all(
-      NODES.filter((n) => n.host).map((n) => probeHost(n.id, n.host as string)),
+      NODES.flatMap((n) => n.host ? [probeHost(n.id, n.host)] : []),
     ),
 );
 

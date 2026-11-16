@@ -1,4 +1,9 @@
 # Remaining scope
+- [ ] Stage 1: replace retired Lightsail registry with the three canonical endpoints; correct StancePanel; replace the scaffold queue with recorded local activity; align dependent surfaces and verify.
+- [ ] Stage 2: blocked on the original ATMOS source/profile and operator-approved key/artifact pins. Available uploads contain reviews, not the referenced verifier archive; do not invent signed bytes. Proof Fulcrum and snapshot export remain pending.
+- [ ] Stage 3: integrate supported signed-health verification into Quantotalus without promoting unsigned reachability.
+- [ ] Stage 4: expose canonical NEBULA endpoint candidates without inventing enrollment keys or signed relay receipts.
+- [ ] Stage 5: run regression tests and all-blade browser checks; preserve OPERATOR EVIDENCE REQUIRED until real operator evidence verifies.
 - [ ] All-blade Core hardening: preserve PAM history; test Ore tracing/loads; validate and fingerprint Truth Substrate; verify every blade page.
 - [ ] All-blade network completion: authenticated signed endpoints, operator key bindings, and real fleet receipts. Blocked on operator-owned evidence; reachability alone cannot grant LIVE.
 - [ ] Finish evidence-only AI node explanations and verify trust isolation, error handling and browser display.

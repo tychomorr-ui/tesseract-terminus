@@ -24,10 +24,10 @@ export function FleetHosts() {
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
           <div className="text-[0.7rem] uppercase tracking-[0.18em] text-gold">
-            Operator fleet · live host reachability
+            Canonical endpoints · host reachability
           </div>
           <h3 className="mt-2 font-display text-lg text-foreground">
-            Five operator-owned instances, probed server-side
+            {hosts.length} operator-declared endpoints
           </h3>
         </div>
         <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
@@ -37,9 +37,8 @@ export function FleetHosts() {
         </span>
       </div>
       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-        Each host is contacted directly from the server every 60 seconds — no
-        opaque browser requests, no cached claims. REACHABLE means the machine
-        answered. LIVE still requires an ARCHANGEL/v0 signed status.
+        Reachability is checked every 60 seconds. An HTTP response does not establish
+        service health, ownership, or signed status. OPERATOR EVIDENCE REQUIRED.
       </p>
 
       <ul className="mt-4 grid gap-2 sm:grid-cols-2">

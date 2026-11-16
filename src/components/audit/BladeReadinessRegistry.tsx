@@ -20,7 +20,7 @@ const STATE_STYLE: Record<ReadinessState, string> = {
   PURGED:    "border-destructive/50 text-destructive",
 };
 
-const BOUND_NODE_IDS = ["resonate-earth", "root-gate", "tesseract-a"];
+const BOUND_NODE_IDS = NODES.map((node) => node.id);
 
 function toFacts(nodeId: string, s: ProbeStatus): ProbeFacts {
   const map: Record<ProbeStatus["state"], ProbeFacts["state"]> = {
@@ -142,8 +142,8 @@ export function BladeReadinessRegistry() {
         blades render but have no node to verify — they report{" "}
         <span className="text-foreground">RENDERED</span>, not READY. Purged
         blades are deleted from the registry, not parked. Re-verify runs the same
-        probes against the bound fleet nodes (Root-Gate · Kether-Gate · Resonate-Earth)
-        and overlays the results — no server proxy, no telemetry.
+        probes against the canonical endpoints (Root-Gate · Tesseract-Terminus · Truth-Talk)
+        and overlays the results. Historical artifact rows do not verify these endpoints.
       </p>
 
       <div className="grid grid-cols-2 gap-2 font-mono text-[0.65rem] sm:grid-cols-6">

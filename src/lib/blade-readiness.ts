@@ -43,9 +43,8 @@ export type BladeReadiness = {
 // surface; the rest of the blades are UI surfaces (rendered or purged) and
 // MUST NOT be reported as bound to a node they don't actually verify.
 export const BLADE_NODE_BINDING: Record<string, string> = {
-  "04": "resonate-earth",     // Network NEBULA samm mist-flow vertex
+  "04": "root-gate",         // Canonical relay candidate; enrollment remains unverified
   "07": "root-gate",          // TERMINUS · ops surface against the control plane
-  "13": "tesseract-a",        // PROOF FULCRUM · operator stamp / fleet witness
 };
 
 type OpsEntry = {
@@ -97,8 +96,8 @@ export function latestSignedStatusByNode(): Map<string, ProbeFacts> {
 export function computeRegistry(
   overrides?: Map<string, ProbeFacts>,
 ): BladeReadiness[] {
-  const base = latestSignedStatusByNode();
-  const probes = new Map(base);
+  // Historical artifact rows are not evidence for the replaced host registry.
+  const probes = new Map<string, ProbeFacts>();
   if (overrides) for (const [k, v] of overrides) probes.set(k, v);
   return BLADES.map((blade) => {
     const nodeId = BLADE_NODE_BINDING[blade.n];

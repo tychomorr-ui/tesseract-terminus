@@ -14,8 +14,8 @@ const ROWS: Row[] = [
     meta: "declared endpoint · signature unverified", probeId: "root-gate" },
   { key: "tesseract-terminus", label: "TESSERACT-TERMINUS", host: "tesseract.manus.space",
     meta: "declared endpoint · signature unverified", probeId: "tesseract-terminus" },
-  { key: "kether-gate", label: "TRUTH-TALK", host: "truthtalk.xinus.one",
-    meta: "declared endpoint · signature unverified", probeId: "kether-gate" },
+  { key: "truth-talk", label: "TRUTH-TALK", host: "truthtalk.xinus.one",
+    meta: "declared endpoint · signature unverified", probeId: "truth-talk" },
 ];
 
 export function UplinkHeader() {

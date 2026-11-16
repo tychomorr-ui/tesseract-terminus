@@ -19,3 +19,5 @@
 - Truth Substrate stores full-sample SHA-256 fingerprints and validates measurements before persistence; local fingerprints are not signatures or economic valuations.
 - Retired blade URLs redirect to an existing evidence surface; never dereference removed registry entries.
 - Seventh Dimension projects recorded local state and verified Ore loads; its CID is a snapshot fingerprint, not fleet verification.
+- Derive the dashboard's recorded next moves from the local PAM chain, never synthetic jobs or inferred execution states; preserve integrity faults visibly.
+- Treat the current node registry as endpoint declarations only, and never reuse historical ops-log verification as proof for replacement endpoints.

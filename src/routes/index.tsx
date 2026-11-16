@@ -60,7 +60,7 @@ function Console() {
         <AxisGrid />
 
         <footer className="border-t border-border pt-4 text-center text-[0.65rem] uppercase tracking-[0.24em] text-muted-foreground">
-          SOVEREIGN CONSOLE · ZERO TELEMETRY · NO THIRD-PARTY MIDDLEWARE
+          SOVEREIGN CONSOLE · LOCAL EVIDENCE · SIGNED FLEET STATUS UNVERIFIED
         </footer>
       </div>
     </div>

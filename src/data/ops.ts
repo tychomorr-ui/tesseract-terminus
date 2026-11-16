@@ -11,13 +11,11 @@ export type OpsEntry = {
 
 export const OPS_LOG: OpsEntry[] = opsRaw as OpsEntry[];
 
-// Declared gateway domains, lifted from the artifact itself (sam.status).
-// The /ops route binds each entry to live probes against these.
+// Current operator declarations, not historical artifact gateway claims.
 export const DECLARED_GATEWAYS = [
+  { host: "rootgate.manus.space", url: "https://rootgate.manus.space" },
   { host: "tesseract.manus.space", url: "https://tesseract.manus.space" },
-  { host: "nexinus.net", url: "https://nexinus.net" },
-  { host: "xinus.one", url: "https://xinus.one" },
-  { host: "monarch.xinus.one", url: "https://monarch.xinus.one/health" },
+  { host: "truthtalk.xinus.one", url: "https://truthtalk.xinus.one" },
 ] as const;
 
 export const OPS_ARTIFACT_NAME = "terminus-ops-2026-06-25.json";

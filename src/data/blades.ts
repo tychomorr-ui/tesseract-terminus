@@ -36,8 +36,8 @@ export const BLADES: Blade[] = [
     tagline: "triadaxial spinner · tesseract · rootgate · truthtalk",
     blocker: "triad reachability is measured below; LIVE waits on signed status from all three vertices" },
   { n: "13", glyph: "◇", name: "PROOF FULCRUM",     route: "/proof-fulcrum",   status: "STANDBY",
-    tagline: "ed25519 fleet witness · operator stamp",
-    blocker: "first signed fleet receipt" },
+    tagline: "offline ARCHANGEL review · unsigned console export",
+    blocker: "ATMOS source/profile and operator-approved identity/artifact pins; local review does not establish fleet health" },
   { n: "14", glyph: "⬡", name: "Seventh Dimension", route: "/seventh-dimension", status: "LIVE",
     tagline: "local cross-axis snapshot · verified Ore loads · unsigned CID" },
 ];

@@ -4,6 +4,8 @@ import { BLADES } from "@/data/blades";
 import { loadChain, type TruthChainLink } from "@/data/truth-chain";
 import { probeSignedStatus } from "@/lib/probe-signed";
 import type { ProbeStatus } from "@/lib/probes";
+import { NODES } from "@/data/nodes";
+import { Button } from "@/components/ui/button";
 
 const BLADE = BLADES.find((b) => b.n === "04")!;
 
@@ -79,13 +81,25 @@ function NebulaBlade() {
           &nbsp;·&nbsp;measured&nbsp;<span className="text-gold">{measured}</span>
           &nbsp;·&nbsp;sweep&nbsp;<span className="text-foreground">{tick}</span>
         </div>
-        <button
+        <Button variant="outline"
           onClick={probeAll}
           disabled={chain.length === 0 || probing}
           className="rounded border border-gold px-3 py-1.5 text-[0.7rem] uppercase tracking-[0.2em] text-gold transition hover:bg-gold/10 disabled:cursor-not-allowed disabled:opacity-40"
         >
           {probing ? "probing…" : "sweep signed health"}
-        </button>
+        </Button>
+      </section>
+
+      <section className="space-y-3 border-t border-border pt-6">
+        <h2 className="font-display text-lg text-gold">Canonical endpoint declarations</h2>
+        <p className="text-xs text-warning">OPERATOR EVIDENCE REQUIRED · no relay enrollment, signing key or signed health inferred</p>
+        <ul className="grid gap-3 sm:grid-cols-3">
+          {NODES.map((node) => <li key={node.id} className="min-w-0 rounded border border-border p-4">
+            <p className="text-sm text-foreground">{node.name}</p>
+            <p className="mt-2 break-all font-mono text-xs text-muted-foreground">{node.host}</p>
+            <p className="mt-3 text-xs text-warning">DECLARED · UNENROLLED</p>
+          </li>)}
+        </ul>
       </section>
 
       {chain.length === 0 ? (
@@ -129,9 +143,9 @@ function RelayRow({ link, result }: { link: TruthChainLink; result?: SignedResul
         <div className="font-mono text-[0.65rem] uppercase tracking-[0.2em]">{state}</div>
       </div>
       <div className="mt-2 grid gap-1 font-mono text-[0.65rem] text-muted-foreground sm:grid-cols-2">
-        <span>status_url: <span className="text-foreground">{link.statusUrl}</span></span>
+        <span className="break-all">status_url: <span className="text-foreground">{link.statusUrl}</span></span>
         <span>ed_pub: <span className="text-foreground">{link.edPubHex.slice(0, 24)}…</span></span>
-        <span>endpoint: <span className="text-foreground">{link.endpoint}</span></span>
+        <span className="break-all">endpoint: <span className="text-foreground">{link.endpoint}</span></span>
         <span>enrolled: <span className="text-foreground">{new Date(link.enrolledAt).toISOString().slice(0, 19)}Z</span></span>
       </div>
       {result && "detail" in result && result.detail && (

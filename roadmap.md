@@ -1,6 +1,7 @@
 # Remaining scope
-- [ ] Stage 1: replace retired Lightsail registry with the three canonical endpoints; correct StancePanel; replace the scaffold queue with recorded local activity; align dependent surfaces and verify.
-- [ ] Stage 2: blocked on the original ATMOS source/profile and operator-approved key/artifact pins. Available uploads contain reviews, not the referenced verifier archive; do not invent signed bytes. Proof Fulcrum and snapshot export remain pending.
+- [ ] Continue the ordered runbook: finish Stage 1 verification, build the locally supportable Stage 2 evidence surface, expose Stage 4 declarations, and verify the console without claiming fleet completion.
+- [ ] Stage 1: canonical registry, StancePanel and recorded PAM queue implemented; complete final regression and browser checks.
+- [ ] Stage 2: implement offline inspection using the existing ARCHANGEL/v0 verifier and an unsigned local snapshot export. ATMOS support remains blocked on original source/profile and operator-approved key/artifact pins; do not invent signed bytes.
 - [ ] Stage 3: integrate supported signed-health verification into Quantotalus without promoting unsigned reachability.
 - [ ] Stage 4: expose canonical NEBULA endpoint candidates without inventing enrollment keys or signed relay receipts.
 - [ ] Stage 5: run regression tests and all-blade browser checks; preserve OPERATOR EVIDENCE REQUIRED until real operator evidence verifies.

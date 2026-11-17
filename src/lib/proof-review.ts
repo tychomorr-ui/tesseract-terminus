@@ -17,6 +17,6 @@ export function reviewProof(raw: string, expectedKey: string, at = Date.now()): 
   if (typeof body.pub === "string" && body.pub.toLowerCase() !== expectedKey.trim().toLowerCase())
     return { verdict: "KEY_MISMATCH", detail: "Embedded signing key differs from the supplied comparison key." };
   const result = verifyEnvelope(body, expectedKey.trim(), at, "offline");
-  if (result.state !== "measured") return { verdict: "UNVERIFIED", detail: result.detail };
+  if (result.state !== "measured") return { verdict: "UNVERIFIED", detail: "detail" in result ? result.detail : "Signature check did not complete." };
   return { verdict: "LOCAL_SIGNED_REMOTE_UNVERIFIED", detail: "Signature, payload fingerprint and freshness checked against the supplied key. Endpoint identity, artifact authority and fleet health are not established; the outer node field is not signature-bound." };
 }

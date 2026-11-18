@@ -128,14 +128,13 @@ async function runOne(id: string) {
   });
 }
 
-let started = false;
 export function startProbes(intervalMs = 15_000) {
-  if (started || typeof window === "undefined") return;
-  started = true;
+  if (typeof window === "undefined") return;
   const ids = NODES.filter((n) => n.probe).map((n) => n.id);
   // Seed the buffer so the ticker has something to render before first probe completes.
   pushEvent({ ts: Date.now(), tag: "ARCHANGEL", state: "probing", detail: "UPLINK INITIATED" });
   const tick = () => ids.forEach((id) => void runOne(id));
   tick();
-  setInterval(tick, intervalMs);
+  const timer = setInterval(tick, intervalMs);
+  return () => clearInterval(timer);
 }

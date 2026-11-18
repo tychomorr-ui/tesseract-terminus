@@ -1,12 +1,11 @@
 # Remaining scope
-- [ ] Continue the ordered runbook: finish Stage 1 verification, build the locally supportable Stage 2 evidence surface, expose Stage 4 declarations, and verify the console without claiming fleet completion.
-- [ ] Stage 1: canonical registry, StancePanel and recorded PAM queue implemented; complete final regression and browser checks.
-- [ ] Stage 2: implement offline inspection using the existing ARCHANGEL/v0 verifier and an unsigned local snapshot export. ATMOS support remains blocked on original source/profile and operator-approved key/artifact pins; do not invent signed bytes.
-- [ ] Stage 3: integrate supported signed-health verification into Quantotalus without promoting unsigned reachability.
-- [ ] Stage 4: expose canonical NEBULA endpoint candidates without inventing enrollment keys or signed relay receipts.
-- [ ] Stage 5: run regression tests and all-blade browser checks; preserve OPERATOR EVIDENCE REQUIRED until real operator evidence verifies.
-- [ ] All-blade Core hardening: preserve PAM history; test Ore tracing/loads; validate and fingerprint Truth Substrate; verify every blade page.
-- [ ] All-blade network completion: authenticated signed endpoints, operator key bindings, and real fleet receipts. Blocked on operator-owned evidence; reachability alone cannot grant LIVE.
+- [x] Stage 1: canonical registry, StancePanel and recorded PAM queue; local regression and blade-page checks passed.
+- [x] Stage 2 local: offline ARCHANGEL/v0 inspection and unsigned local snapshot export.
+- [x] Stage 3 local: Quantotalus displays the shared canonical triad without polling and links to offline evidence review.
+- [ ] Stages 2–3 signed health: integrate the original ATMOS verifier/profile and operator-approved identity and artifact bindings, then verify genuine receipts for the three endpoints. Blocked on operator source and evidence; keep OPERATOR EVIDENCE REQUIRED.
+- [x] Stage 4: expose canonical NEBULA endpoint candidates without inventing enrollment keys or signed relay receipts.
+- [x] Stage 5 local: regressions and all-blade browser checks for the local release; recheck changed surfaces after each update.
+- [x] All-blade Core hardening: preserve PAM history, test Ore tracing/loads, and validate and fingerprint Truth Substrate.
 - [ ] Finish evidence-only AI node explanations and verify trust isolation, error handling and browser display.
 
 - [x] Disable the unauthenticated public reprobe writes and unrestricted read; 82 web-app/protocol tests pass and live GET/POST return 410. Scheduled updates through this hook are now disabled. Contract tests remain unverified because their separate Hardhat dependency is unavailable.

@@ -23,3 +23,4 @@
 - Treat the current node registry as endpoint declarations only, and never reuse historical ops-log verification as proof for replacement endpoints.
 - Proof Fulcrum reuses the existing ARCHANGEL reference verifier offline and never writes trust stores; supplied comparison keys and unsigned outer identity fields cannot establish remote authority.
 - Console snapshot exports preserve original non-secret record bytes and report PAM/Ore/substrate faults under an unsigned CID; refuse concurrent changes so export cannot launder history or mix local revisions.
+- Quantotalus reads canonical endpoint declarations from the shared registry and stays offline until operator-bound signed health can be verified; unsigned reachability cannot represent fleet health.

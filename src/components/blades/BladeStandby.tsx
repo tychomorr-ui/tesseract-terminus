@@ -25,12 +25,8 @@ export function BladeStandby({ blade, children }: { blade: Blade; children?: Rea
         <div className="text-[0.65rem] uppercase tracking-[0.22em] text-muted-foreground">
           standby
         </div>
-        <p className="mt-2 text-sm text-foreground">
+        <p className="mt-2 text-sm text-warning">
           {blade.blocker ?? "This blade is registered in the axis but holds no operational surface yet."}
-        </p>
-        <p className="mt-4 text-xs text-muted-foreground">
-          No mock data. No vendor middleware. Promotion to LIVE requires a real
-          signal, not a placeholder.
         </p>
       </section>
 

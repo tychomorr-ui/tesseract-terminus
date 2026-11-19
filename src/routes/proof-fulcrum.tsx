@@ -6,19 +6,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { reviewProof, type ProofReview } from "@/lib/proof-review";
 import { captureConsoleSnapshot } from "@/lib/console-snapshot";
+import { PROOF_MAX_LENGTH } from "@/lib/atmos-proof";
 
 export const Route = createFileRoute("/proof-fulcrum")({
   head: () => ({ meta: [
       { property: "og:title", content: "Proof Fulcrum · Terminus Offline Evidence" },
-      { property: "og:description", content: "Local ARCHANGEL signature review and unsigned console snapshot export. Fleet authority remains unverified." },
+      { property: "og:description", content: "Offline ARCHANGEL and ATMOS evidence review and unsigned console snapshot export. Fleet authority remains unverified." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },{ title: "Proof Fulcrum · Terminus Offline Evidence" }, { name: "description", content: "Review existing ARCHANGEL/v0 envelopes offline and export original local console records with integrity faults preserved." }] }),
+      { name: "twitter:card", content: "summary" },{ title: "Proof Fulcrum · Terminus Offline Evidence" }, { name: "description", content: "Review ARCHANGEL/v0 envelopes, ATMOS signed manifests and ATMOS signed health offline, and export original local console records." }] }),
   component: ProofFulcrum,
 });
 
 function ProofFulcrum() {
   const [raw, setRaw] = useState("");
   const [key, setKey] = useState("");
+  const [manifest, setManifest] = useState("");
   const [result, setResult] = useState<ProofReview | null>(null);
   const [cid, setCid] = useState("");
   const [error, setError] = useState("");
@@ -45,29 +47,33 @@ function ProofFulcrum() {
     </header>
     <section className="space-y-4" aria-labelledby="review-heading">
       <h2 id="review-heading" className="font-display text-xl text-gold">Offline signature review</h2>
-      <p className="text-xs text-muted-foreground">ARCHANGEL/v0 reference profile · local comparison only · remote identity unverified</p>
+      <p className="text-xs text-muted-foreground">Archangel · ARCHANGEL/v0 envelopes, ATMOS v1 manifests and signed health</p>
       <label className="block space-y-2 text-sm">Signed envelope
         <Textarea aria-label="Signed envelope" value={raw} onChange={(e) => { setRaw(e.target.value); reset(); }} className="min-h-48 font-mono text-xs" spellCheck={false} />
       </label>
-      <label className="block space-y-2 text-sm">Independently obtained comparison key · Ed25519 public hex
+      <label className="block space-y-2 text-sm">Independent comparison · ARCHANGEL Ed25519 public key or ATMOS SHA-256 SPKI fingerprint (hex)
         <Input aria-label="Comparison public key" value={key} onChange={(e) => { setKey(e.target.value); reset(); }} className="font-mono text-xs" spellCheck={false} />
       </label>
+      <details className="space-y-2 text-sm">
+        <summary className="cursor-pointer">Companion manifest · required for ATMOS signed health only</summary>
+        <Textarea aria-label="Companion signed manifest" value={manifest} onChange={(e) => { setManifest(e.target.value); reset(); }} className="min-h-32 font-mono text-xs" spellCheck={false} />
+      </details>
       <input type="file" accept=".json,application/json" ref={file} className="hidden" aria-label="Import envelope file" onChange={async (e) => {
         const selected = e.target.files?.[0]; if (!selected) return;
         reset();
-        if (selected.size > 1_000_000) { setError("Envelope exceeds the 1 MB local review limit."); return; }
+        if (selected.size > PROOF_MAX_LENGTH) { setError("Envelope exceeds the 1 MB local review limit."); e.target.value = ""; return; }
         try { setRaw(await selected.text()); } catch { setError("Could not read the envelope file."); }
         e.target.value = "";
       }} />
       <div className="flex flex-wrap gap-3">
         <Button variant="outline" onClick={() => file.current?.click()}><FileUp />Import JSON</Button>
-        <Button disabled={!raw.trim()} onClick={() => setResult(reviewProof(raw, key))}><ShieldCheck />Review signature</Button>
+        <Button disabled={!raw.trim()} onClick={() => setResult(reviewProof(raw, key, Date.now(), manifest))}><ShieldCheck />Review signature</Button>
       </div>
       {result && <div role="status" className="space-y-2 border-l-2 border-warning pl-4">
         <p className="break-all font-mono text-sm text-warning">{result.verdict}</p>
         <p className="text-sm text-muted-foreground">{result.detail}</p>
       </div>}
-      <p className="text-xs text-warning">ATMOS · unsupported until original verifier source and operator-approved bindings are supplied. Quantus receipts are not accepted as fleet authority.</p>
+      <p className="text-xs text-warning">Offline comparison only. Neither a matching signature nor a Quantus witness receipt establishes fleet authority.</p>
     </section>
     <section className="space-y-4 border-t border-border pt-6" aria-labelledby="snapshot-heading">
       <h2 id="snapshot-heading" className="font-display text-xl text-gold">Console snapshot</h2>

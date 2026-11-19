@@ -34,10 +34,10 @@ export const BLADES: Blade[] = [
     tagline: "truth-coin substrate · live BTC readout · pistifus-weighted" },
   { n: "12", glyph: "◬", name: "QUANTOTALUS",       route: "/quantotalus",     status: "STANDBY",
     tagline: "canonical triad declarations · signed fleet health unverified",
-    blocker: "OPERATOR EVIDENCE REQUIRED · original ATMOS verifier, approved identity and artifact bindings, and signed receipts for all three endpoints." },
+    blocker: "OPERATOR EVIDENCE REQUIRED · approved identity and artifact bindings, and verified live evidence for all three endpoints." },
   { n: "13", glyph: "◇", name: "PROOF FULCRUM",     route: "/proof-fulcrum",   status: "STANDBY",
-    tagline: "offline ARCHANGEL review · unsigned console export",
-    blocker: "ATMOS source/profile and operator-approved identity/artifact pins; local review does not establish fleet health" },
+    tagline: "offline ARCHANGEL / ATMOS review · unsigned console export",
+    blocker: "Operator-approved identity and artifact bindings and verified live evidence; offline review does not establish fleet health" },
   { n: "14", glyph: "⬡", name: "Seventh Dimension", route: "/seventh-dimension", status: "LIVE",
     tagline: "local cross-axis snapshot · verified Ore loads · unsigned CID" },
 ];

@@ -1,4 +1,5 @@
 import { isReference, verifyEnvelope } from "@/lib/signed-envelope";
+import { ATMOS_HEALTH, ATMOS_MANIFEST, isProofObject, PROOF_MAX_LENGTH, reviewAtmos } from "@/lib/atmos-proof";
 
 export type ProofReview = {
   verdict: "MALFORMED" | "UNSUPPORTED_PROFILE" | "KEY_MISMATCH" | "UNVERIFIED" | "LOCAL_SIGNED_REMOTE_UNVERIFIED";
@@ -6,12 +7,14 @@ export type ProofReview = {
 };
 
 /** Offline only. The envelope's outer node field is not signed by this profile. */
-export function reviewProof(raw: string, expectedKey: string, at = Date.now()): ProofReview {
+export function reviewProof(raw: string, expectedKey: string, at = Date.now(), manifestRaw = ""): ProofReview {
+  if (raw.length > PROOF_MAX_LENGTH) return { verdict: "MALFORMED", detail: "Envelope exceeds the local review limit." };
   let body: unknown;
   try { body = JSON.parse(raw); } catch { return { verdict: "MALFORMED", detail: "Invalid JSON." }; }
-  if (!body || typeof body !== "object" || Array.isArray(body))
+  if (!isProofObject(body))
     return { verdict: "MALFORMED", detail: "Expected a signed envelope object." };
-  if (!isReference(body)) return { verdict: "UNSUPPORTED_PROFILE", detail: "Only the existing ARCHANGEL/v0 reference profile is supported. ATMOS source and signing rules are not supplied." };
+  if (body.schema === ATMOS_MANIFEST || body.schema === ATMOS_HEALTH) return reviewAtmos(body, expectedKey, manifestRaw);
+  if (!isReference(body)) return { verdict: "UNSUPPORTED_PROFILE", detail: "Supported profiles: ARCHANGEL/v0 reference, ATMOS signed node manifest v1, and ATMOS signed health v1." };
   if (!/^[0-9a-f]{64}$/i.test(expectedKey.trim()))
     return { verdict: "UNVERIFIED", detail: "An independently obtained 32-byte public key is required; the envelope's embedded key is not authority." };
   if (typeof body.pub === "string" && body.pub.toLowerCase() !== expectedKey.trim().toLowerCase())

@@ -1,0 +1,39 @@
+{
+  "schema": "NEXINUS_ATMOS_SIGNED_NODE_MANIFEST/v1",
+  "manifestVersion": "ATMOS-1.1.1",
+  "manifestId": "atmos-node-archangel",
+  "nodeId": "ARCHANGEL",
+  "displayName": "ARCHANGEL",
+  "declaredRegion": "London",
+  "declaredRole": "control plane · mesh governance",
+  "declaredCanonicalUrl": "https://archangel.nexinus.net",
+  "capabilities": [
+    "CONTROL_PLANE",
+    "MESH_GOVERNANCE"
+  ],
+  "distinctFrom": [],
+  "applicationBoundary": "RUNNING_GOVERNANCE_SERVER",
+  "identity": {
+    "algorithm": "Ed25519",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAK4tYXT9RHNgOv/5YacGaFxjmmcCQaVj10TXDNMdnqcc=\n-----END PUBLIC KEY-----\n",
+    "identityHash": "5a7d0be5747b2a61bbe4a5d95772ae50a469688e85d40028b501c893dea2013a",
+    "publicKeyFingerprintSha256": "5a7d0be5747b2a61bbe4a5d95772ae50a469688e85d40028b501c893dea2013a",
+    "signerReference": "operator-atmos-ed25519-controlled-20261027"
+  },
+  "hashes": {
+    "publicKeyFingerprintSha256": "5a7d0be5747b2a61bbe4a5d95772ae50a469688e85d40028b501c893dea2013a",
+    "identityDocumentSha256": "1500ade86f2a139ee3c4e6b63dc8bbbb488d7c4a6e234fb99bc7aee1e9c102d9",
+    "artifactSha256": "9b2cc7cb595308a20ef9e7d148aeeb17ee4f4d04dae13eebf50a41ce322fe33b"
+  },
+  "signedAt": "2026-10-28T17:41:00Z",
+  "verification": {
+    "manifestStatus": "SIGNED_PUBLIC_MANIFEST",
+    "headStatus": "NOT_RUN",
+    "trustState": "SIGNED_NOT_PROBED",
+    "authority": "NOT_CONFIGURED",
+    "network": "UNKNOWN"
+  },
+  "boundary": "SIGNATURE_PROVES_CONTROL_OF_KEY_ONLY",
+  "payloadHash": "0473483282537b98f69786bff49d3b6be7c4280861788f10ec4618e89709145f",
+  "signature": "lqwdE3wIKpjPik93y9eGI4wXcRGl1Ub53yLoWQ+n20zsKgIl1BX8gi4ZJghzRV/pVcNSwBuClNivduNR8dsPAQ=="
+}

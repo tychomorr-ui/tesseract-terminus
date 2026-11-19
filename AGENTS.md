@@ -21,6 +21,6 @@
 - Seventh Dimension projects recorded local state and verified Ore loads; its CID is a snapshot fingerprint, not fleet verification.
 - Derive the dashboard's recorded next moves from the local PAM chain, never synthetic jobs or inferred execution states; preserve integrity faults visibly.
 - Treat the current node registry as endpoint declarations only, and never reuse historical ops-log verification as proof for replacement endpoints.
-- Proof Fulcrum reuses the existing ARCHANGEL reference verifier offline and never writes trust stores; supplied comparison keys and unsigned outer identity fields cannot establish remote authority.
+- Proof Fulcrum reuses the ARCHANGEL reference verifier and the pinned upstream ATMOS wire rules offline; comparison material and self-consistent signatures never establish remote authority or write trust stores.
 - Console snapshot exports preserve original non-secret record bytes and report PAM/Ore/substrate faults under an unsigned CID; refuse concurrent changes so export cannot launder history or mix local revisions.
 - Quantotalus reads canonical endpoint declarations from the shared registry and stays offline until operator-bound signed health can be verified; unsigned reachability cannot represent fleet health.

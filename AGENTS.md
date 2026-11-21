@@ -19,6 +19,7 @@
 - Truth Substrate stores full-sample SHA-256 fingerprints and validates measurements before persistence; local fingerprints are not signatures or economic valuations.
 - Retired blade URLs redirect to an existing evidence surface; never dereference removed registry entries.
 - Seventh Dimension projects recorded local state and verified Ore loads; its CID is a snapshot fingerprint, not fleet verification.
+- Cryptochrometer's offline adapter rederives EARTH ratios from pinned peer handshake ages with 30-second snapshots and 60-second handshakes; imported unsigned observations never change the six local axes or trust stores, and live transport requires a supplied Quantus contract.
 - Derive the dashboard's recorded next moves from the local PAM chain, never synthetic jobs or inferred execution states; preserve integrity faults visibly.
 - Treat the current node registry as endpoint declarations only, and never reuse historical ops-log verification as proof for replacement endpoints.
 - Proof Fulcrum reuses the ARCHANGEL reference verifier and the pinned upstream ATMOS wire rules offline; comparison material and self-consistent signatures never establish remote authority or write trust stores.

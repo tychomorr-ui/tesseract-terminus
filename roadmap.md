@@ -1,4 +1,5 @@
 # Remaining scope
+- [ ] Connect authenticated operator-only PAM / Reflective Intel chat to local pam-core, test trust isolation, and deliver sovereign-host deployment commands.
 - [x] Blade 14 local: normalized offline Cryptochrometer import, pinned-peer ambient ratio projection, freshness and handshake expiry; 13 new rules tested and paste/file/expiry flows checked in browser with no fleet/substrate requests.
 - [ ] Blade 14 live/upstream compatibility: blocked on an actual Quantus observation export or published observation contract/source; saved GitHub credentials were rejected. No live fleet readings or signature authority claimed.
 - [x] Stage 1: canonical registry, StancePanel and recorded PAM queue; local regression and blade-page checks passed.

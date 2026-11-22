@@ -15,6 +15,7 @@ import { LANE_GLOSS, LANE_ORDER, detectDrift, mirror } from "@/lib/pam";
 import { pistifusReadout, type FaithScore } from "@/lib/pistifus";
 import { DoctrineAudit } from "@/components/audit/DoctrineAudit";
 import { Button } from "@/components/ui/button";
+import { PamChat } from "@/components/pam/PamChat";
 export const Route = createFileRoute("/pam")({
   head: () => ({
     meta: [
@@ -129,6 +130,8 @@ function PamConsole() {
         </p>
         <ChainBadge chain={chain} count={envelopes.length} headCid={headEnv?.cid ?? null} />
       </header>
+
+      <PamChat origin="/pam" />
 
       <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-5 rounded border border-border bg-card/40 p-5">

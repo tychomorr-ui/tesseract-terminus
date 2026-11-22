@@ -5,18 +5,21 @@ import { BLADES, type Blade } from "@/data/blades";
 import { NODES } from "@/data/nodes";
 import { useProbeStatus } from "@/lib/probe-store";
 import { loadEnvelopes, type Envelope } from "@/data/truth-ledger";
+import { PamChat } from "@/components/pam/PamChat";
 
-const BLADE = BLADES.find((b) => b.n === "03")!;
+const BLADE = BLADES.find((b) => b.n === "03");
+if (!BLADE) throw new Error("Reflective Intel missing from canonical registry");
+const REFLECTIVE_BLADE: Blade = BLADE;
 
 export const Route = createFileRoute("/reflective-intel")({
   head: () => ({
     meta: [
-      { property: "og:title", content: `${BLADE.name} · Blade ${BLADE.n}` },
-      { property: "og:description", content: BLADE.tagline },
+      { property: "og:title", content: `${REFLECTIVE_BLADE.name} · Blade ${REFLECTIVE_BLADE.n}` },
+      { property: "og:description", content: REFLECTIVE_BLADE.tagline },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { title: `${BLADE.name} · Blade ${BLADE.n}` },
-      { name: "description", content: BLADE.tagline },
+      { title: `${REFLECTIVE_BLADE.name} · Blade ${REFLECTIVE_BLADE.n}` },
+      { name: "description", content: REFLECTIVE_BLADE.tagline },
     ],
   }),
   component: ReflectiveIntel,
@@ -48,14 +51,14 @@ function ReflectiveIntel() {
       <header className="space-y-3 border-b border-border pb-6">
         <div className="flex items-baseline justify-between gap-4">
           <div className="text-[0.7rem] uppercase tracking-[0.22em] text-gold">
-            OMNI-SAM AXIS · BLADE {BLADE.n}
+            OMNI-SAM AXIS · BLADE {REFLECTIVE_BLADE.n}
           </div>
           <Link to="/" className="text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground hover:text-gold">
             ← axis
           </Link>
         </div>
         <h1 className="font-display text-3xl tracking-[0.1em] text-foreground">
-          <span className="text-gold">{BLADE.glyph}</span>&nbsp; {BLADE.name}
+          <span className="text-gold">{REFLECTIVE_BLADE.glyph}</span>&nbsp; {REFLECTIVE_BLADE.name}
         </h1>
         <p className="max-w-3xl text-sm text-muted-foreground">
           Per-blade mirror. Each row reflects the blade's declared status, its
@@ -64,7 +67,9 @@ function ReflectiveIntel() {
         </p>
       </header>
 
-      <section>
+      <PamChat origin="/reflective-intel" />
+
+      <section className="overflow-x-auto">
         <table className="w-full border-collapse font-mono text-[0.72rem]">
           <thead>
             <tr className="border-b border-border text-left text-[0.6rem] uppercase tracking-[0.18em] text-muted-foreground">

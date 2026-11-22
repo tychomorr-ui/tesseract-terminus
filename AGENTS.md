@@ -25,3 +25,4 @@
 - Proof Fulcrum reuses the ARCHANGEL reference verifier and the pinned upstream ATMOS wire rules offline; comparison material and self-consistent signatures never establish remote authority or write trust stores.
 - Console snapshot exports preserve original non-secret record bytes and report PAM/Ore/substrate faults under an unsigned CID; refuse concurrent changes so export cannot launder history or mix local revisions.
 - Quantotalus reads canonical endpoint declarations from the shared registry and stays offline until operator-bound signed health can be verified; unsigned reachability cannot represent fleet health.
+- PAM chat uses an authenticated server function with a server-configured operator-ID allowlist and explicit local-runtime opt-in; the fixed loopback Ollama coprocessor returns bounded unsigned reflections and has no trust-store write path.
